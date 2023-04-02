@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cronómetro</title>
+  </head>
+  <body>
+    <h1 id="cronometro">00:00:00</h1>
+    <button onclick="iniciar()">Iniciar</button>
+    <button onclick="pausar()">Pausar</button>
+    <button onclick="reiniciar()">Reiniciar</button>
+    <script>
+      var tiempo = 0;
+      var intervalo;
+      function iniciar() {
+        intervalo = setInterval(function () {
+          tiempo++;
+          actualizarCronometro();
+        }, 1000);
+      }
+      function pausar() {
+        clearInterval(intervalo);
+      }
+      function reiniciar() {
+        clearInterval(intervalo);
+        tiempo = 0;
+        actualizarCronometro();
+      }
+      function actualizarCronometro() {
+        var horas = Math.floor(tiempo / 3600);
+        var minutos = Math.floor((tiempo % 3600) / 60);
+        var segundos = tiempo % 60;
+        horas = horas < 10 ? "0" + horas : horas;
+        minutos = minutos < 10 ? "0" + minutos : minutos;
+        segundos = segundos < 10 ? "0" + segundos : segundos;
+        document.getElementById("cronometro").innerHTML =
+          horas + ":" + minutos + ":" + segundos;
+      }
+    </script>
+  </body>
+</html>
